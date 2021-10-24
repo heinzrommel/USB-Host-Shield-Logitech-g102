@@ -28,7 +28,6 @@ float inputFloat = 0.0;
 char inputCsvString[12];
 int x;
 int y;
-int shoot;
 //-----------------------------------------------------------------------------------//
 void MoveMouseToXY(long x, long y) {
   long max = max(abs(x), abs(y));
