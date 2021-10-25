@@ -107,6 +107,28 @@ void MouseReportParser::Parse(USBHID *hid __attribute__((unused)), bool is_rpt_i
                 // Future:
                 // event = true;
         }
+		
+	 if(prevState.mouseInfo.bmX1Button != pmi->bmX1Button) {
+                if(pmi->bmX1Button) {
+                        OnX1ButtonDown(pmi);
+                } else {
+                        OnX1ButtonUp(pmi);
+                }
+                // Future:
+                // event = true;
+        }
+
+	if(prevState.mouseInfo.bmX2Button != pmi->bmX2Button) {
+                if(pmi->bmX2Button) {
+                        OnX2ButtonDown(pmi);
+                } else {
+                        OnX2ButtonUp(pmi);
+                }
+                // Future:
+                // event = true;
+        }
+
+
 
         //
         // Scroll wheel(s), are not part of the spec, but we could support it.
