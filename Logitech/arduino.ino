@@ -4,7 +4,6 @@
 #include <avr/pgmspace.h>
 #include <hidboot.h>
 #include <hiduniversal.h>
-#include <Keyboard.h>
 #include <Mouse.h>
 
 //----------------------------------------//
@@ -60,6 +59,10 @@ protected:
     virtual void OnMiddleButtonUp   (MOUSEINFO* mi);
     virtual void OnMiddleButtonDown (MOUSEINFO* mi);
     virtual void OnWheelMove        (MOUSEINFO *mi);
+    virtual void OnX1ButtonUp       (MOUSEINFO *mi);
+    virtual void OnX1ButtonDown     (MOUSEINFO *mi);
+    virtual void OnX2ButtonUp       (MOUSEINFO *mi);
+    virtual void OnX2ButtonDown     (MOUSEINFO *mi);
 };
 void MouseRptParser::OnMouseMove(MOUSEINFO* mi)        {
   MoveMouseToXY(mi->dX, mi->dY);
@@ -99,6 +102,27 @@ void MouseRptParser::OnWheelMove(MOUSEINFO *mi)        {
   Mouse.move(0, 0, mi->dZ);
   Mouse.end();
 };
+void MouseRptParser::OnX1ButtonUp(MOUSEINFO *mi)       {
+  Mouse.begin();
+  Mouse.release(MOUSE_BACK);
+  Mouse.end();
+};
+void MouseRptParser::OnX1ButtonDown(MOUSEINFO *mi)     {
+  Mouse.begin();
+  Mouse.press(MOUSE_BACK);
+  Mouse.end();
+};
+void MouseRptParser::OnX2ButtonUp(MOUSEINFO *mi)       {
+  Mouse.begin();
+  Mouse.release(MOUSE_FORWARD);
+  Mouse.end();
+};
+void MouseRptParser::OnX2ButtonDown(MOUSEINFO *mi)     {
+  Mouse.begin();
+  Mouse.press(MOUSE_FORWARD);
+  Mouse.end();
+};
+
 MouseRptParser Prs;
 
 void setup() {
