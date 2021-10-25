@@ -16,6 +16,7 @@ struct {
     uint8_t buttons;
     int8_t x;
     int8_t y;
+    int8_t wheel;
 } mouseReport;
 //----------------------------------------//
 const byte buffSize = 32;
@@ -58,6 +59,7 @@ protected:
     virtual void OnRightButtonDown  (MOUSEINFO* mi);
     virtual void OnMiddleButtonUp   (MOUSEINFO* mi);
     virtual void OnMiddleButtonDown (MOUSEINFO* mi);
+    virtual void OnWheelMove        (MOUSEINFO *mi);
 };
 void MouseRptParser::OnMouseMove(MOUSEINFO* mi)        {
   MoveMouseToXY(mi->dX, mi->dY);
@@ -90,6 +92,11 @@ void MouseRptParser::OnMiddleButtonUp(MOUSEINFO* mi)   {
 void MouseRptParser::OnMiddleButtonDown(MOUSEINFO* mi) {
   Mouse.begin();
   Mouse.press(MOUSE_MIDDLE);
+  Mouse.end();
+};
+void MouseRptParser::OnWheelMove(MOUSEINFO *mi)        {
+  Mouse.begin();
+  Mouse.move(0, 0, mi->dZ);
   Mouse.end();
 };
 MouseRptParser Prs;
