@@ -1,4 +1,3 @@
-#include <avr/pgmspace.h>
 #include <Usb.h>
 #include <usbhub.h>
 #include <avr/pgmspace.h>
